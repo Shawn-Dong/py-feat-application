@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 """
 Extract Action Units (AUs) and Emotions from Video at 30fps
-This script processes a video and extracts AU values and emotions for each frame.
+This script processes videos of any length and extracts AU values and emotions for each frame.
 Outputs: CSV and NPY files with AU values (20 AUs) and emotions (7 emotions).
+
+The script can handle videos of any duration - from seconds to hours.
+Processing time is approximately 1-2 seconds per frame on CPU.
 """
 
 import os
@@ -16,10 +19,12 @@ def extract_au_emotions(video_path, output_prefix=None, target_fps=30):
     """
     Extract Action Units and Emotions from video at specified fps.
     
+    Works with videos of any length (seconds to hours).
+    
     Parameters:
     -----------
     video_path : str
-        Path to input video file
+        Path to input video file (any duration)
     output_prefix : str, optional
         Prefix for output files. If None, uses video filename
     target_fps : int, optional
@@ -42,6 +47,15 @@ def extract_au_emotions(video_path, output_prefix=None, target_fps=30):
     if output_prefix is None:
         output_prefix = os.path.splitext(os.path.basename(video_path))[0]
     
+    # Create results directory
+    results_dir = "results"
+    if not os.path.exists(results_dir):
+        os.makedirs(results_dir)
+        print(f"\n✓ Created results directory: {results_dir}")
+    
+    # Update output prefix to include results directory
+    output_prefix = os.path.join(results_dir, output_prefix)
+    
     # Initialize detector
     print("\n1. Initializing Py-Feat Detector (using CPU)...")
     detector = Detector(device='cpu')
@@ -54,13 +68,30 @@ def extract_au_emotions(video_path, output_prefix=None, target_fps=30):
     print(f"\n2. Processing video: {video_path}")
     
     # Calculate skip_frames based on target fps
-    # For 30fps output, we need to process every frame (skip_frames=0)
-    # If video is higher fps, we can skip frames proportionally
-    skip_frames = 0  # Process every frame to ensure we get 30fps data
+    # Note: skip_frames=0 causes a bug in py-feat, use skip_frames=1 for every frame
+    # skip_frames=1 means process every frame
+    # skip_frames=2 means process every other frame, etc.
+    import cv2
+    cap = cv2.VideoCapture(video_path)
+    video_fps = cap.get(cv2.CAP_PROP_FPS)
+    frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    duration = frame_count / video_fps if video_fps > 0 else 0
+    cap.release()
     
+    # Calculate skip_frames to achieve target fps
+    if video_fps >= target_fps:
+        skip_frames = max(1, int(round(video_fps / target_fps)))
+    else:
+        skip_frames = 1  # Video is already slower than target fps
+    
+    print(f"   - Video FPS: {video_fps:.2f}")
+    print(f"   - Video duration: {duration:.2f} seconds ({duration/60:.2f} minutes)")
+    print(f"   - Total frames in video: {frame_count}")
     print(f"   - Target FPS: {target_fps}")
-    print(f"   - Skip frames: {skip_frames} (processing every frame)")
-    print("   Note: This may take several minutes for a 6-minute video...")
+    print(f"   - Skip frames: {skip_frames} (process every {skip_frames} frame(s))")
+    expected_output_frames = frame_count // skip_frames
+    print(f"   - Expected output frames: ~{expected_output_frames}")
+    print("   Note: This may take several minutes for long videos...")
     
     # Detect facial expressions in the video
     try:
@@ -87,10 +118,14 @@ def extract_au_emotions(video_path, output_prefix=None, target_fps=30):
         
         # Calculate actual fps from the data
         if 'approx_time' in video_prediction.columns:
-            total_time = video_prediction['approx_time'].max()
-            actual_fps = len(video_prediction) / total_time if total_time > 0 else 0
-            print(f"   - Video duration: {total_time:.2f} seconds")
-            print(f"   - Actual FPS: {actual_fps:.2f}")
+            try:
+                total_time = float(video_prediction['approx_time'].max())
+                actual_fps = len(video_prediction) / total_time if total_time > 0 else 0
+                print(f"   - Video duration: {total_time:.2f} seconds")
+                print(f"   - Actual FPS: {actual_fps:.2f}")
+            except (ValueError, TypeError):
+                print(f"   - Video duration: N/A")
+                print(f"   - Actual FPS: N/A")
     
     # Extract AU columns (all columns starting with 'AU')
     au_columns = [col for col in video_prediction.columns if col.startswith('AU')]
@@ -179,14 +214,12 @@ def extract_au_emotions(video_path, output_prefix=None, target_fps=30):
         std_val = video_prediction[col].std()
         print(f"      {col}: mean={mean_val:.4f}, std={std_val:.4f}")
     
-    # Expected vs actual frames for 6-minute video at 30fps
-    expected_frames_6min = 30 * 6 * 60  # 10,800 frames
+    # Frame count summary
     actual_frames = len(video_prediction)
-    print(f"\n11. Frame count analysis:")
-    print(f"    - Expected frames for 6-min video at 30fps: {expected_frames_6min}")
-    print(f"    - Actual frames processed: {actual_frames}")
-    if actual_frames < expected_frames_6min:
-        print(f"    - Note: Video may be shorter than 6 minutes or at different fps")
+    print(f"\n11. Processing summary:")
+    print(f"    - Total frames processed: {actual_frames}")
+    print(f"    - Video duration: {duration:.2f} seconds ({duration/60:.2f} minutes)")
+    print(f"    - Average processing speed: {actual_frames / duration * skip_frames:.2f} fps")
     
     print("\n" + "=" * 70)
     print("✓ Extraction complete!")

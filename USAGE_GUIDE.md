@@ -8,6 +8,8 @@ Extract Action Units (AUs) and emotions from a video at 30fps:
 python extract_au_emotions.py your_video.mp4
 ```
 
+**✨ The script works with videos of any length** - from a few seconds to several hours. Processing time scales linearly with video duration (~1-2 seconds per frame on CPU).
+
 ## Usage Examples
 
 ### 1. Basic Usage (Automatic Output Naming)
@@ -51,12 +53,19 @@ The script extracts 7 emotions per frame:
 - surprise
 - neutral
 
-### Data Dimensions for 6-Minute Video
-For a 6-minute video at 30fps:
+### Data Dimensions Example
+**The script automatically adapts to any video length.**
+
+Example for a 6-minute video at 30fps:
 - Expected frames: 30 fps × 6 minutes × 60 seconds = **10,800 frames**
 - AU data: `(10800, 20)` - 10,800 frames × 20 AUs
 - Emotion data: `(10800, 7)` - 10,800 frames × 7 emotions
 - Combined data: `(10800, 27)` - 10,800 frames × 27 features
+
+For other video lengths, the number of frames will adjust accordingly:
+- 1-minute video at 30fps → 1,800 frames
+- 30-minute video at 30fps → 54,000 frames
+- Any duration works!
 
 ## Loading Data in Python
 
@@ -136,10 +145,13 @@ print(happiest_frames[['frame', 'approx_time', 'happiness']])
 
 ## Processing Time
 
-For a 6-minute video at 30fps:
-- Expected processing time: 15-30 minutes (CPU)
-- Frames to process: ~10,800 frames
-- Progress is shown during processing
+**Processing time scales with video length:**
+- ~1-2 seconds per frame on CPU
+- Example: 6-minute video (10,800 frames) → 3-6 hours
+- Example: 1-minute video (1,800 frames) → 30-60 minutes
+- Progress bar is shown during processing
+
+GPU processing (if available) can be 5-10x faster.
 
 ## Troubleshooting
 

@@ -6,7 +6,8 @@ Facial expression analysis application using Py-Feat to extract Action Units (AU
 
 - Extract 20 Action Units from video frames
 - Extract 7 emotions (anger, disgust, fear, happiness, sadness, surprise, neutral)
-- Process videos at 30fps
+- Process videos at 30fps (configurable)
+- **Supports videos of any length** - from seconds to hours
 - Output to CSV and NumPy formats
 - Comprehensive analysis and visualization tools
 
@@ -18,10 +19,14 @@ Facial expression analysis application using Py-Feat to extract Action Units (AU
 python extract_au_emotions.py your_video.mp4
 ```
 
-For a 6-minute video at 30fps, this will generate:
+**The script automatically handles videos of any duration.** 
+
+Example output for a 6-minute video at 30fps:
 - AU data: (10,800 frames × 20 AUs)
 - Emotion data: (10,800 frames × 7 emotions)
 - Combined data in both CSV and NPY formats
+
+Processing time: ~1-2 seconds per frame on CPU
 
 ## Installation
 

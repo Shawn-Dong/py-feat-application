@@ -26,6 +26,13 @@ ENV/
 *.npy
 *.npz
 
+# Results folder
+results/
+
+# Processing logs
+*.log
+*_processing.log
+
 # IDE
 .vscode/
 .idea/
