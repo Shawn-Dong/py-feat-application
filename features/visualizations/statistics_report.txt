@@ -1,0 +1,144 @@
+================================================================================
+FEATURE EXTRACTION STATISTICS REPORT
+================================================================================
+
+DATASET OVERVIEW
+--------------------------------------------------------------------------------
+Total frames: 25,920
+Total videos: 7
+Total clips: 42
+Average frames per video: 3702.9
+Average frames per clip: 617.1
+
+EMOTION STATISTICS
+--------------------------------------------------------------------------------
+Mean emotion probabilities:
+  anger       : mean=0.0264, std=0.0779, min=0.0000, max=0.9859
+  disgust     : mean=0.0427, std=0.1501, min=0.0000, max=0.9997
+  fear        : mean=0.0181, std=0.0859, min=0.0000, max=0.9996
+  happiness   : mean=0.1032, std=0.2351, min=0.0000, max=0.9974
+  sadness     : mean=0.0279, std=0.0909, min=0.0000, max=0.9730
+  surprise    : mean=0.0553, std=0.1594, min=0.0000, max=0.9969
+  neutral     : mean=0.7264, std=0.3774, min=0.0000, max=0.9996
+
+Dominant emotion counts:
+  neutral     : 19,782 frames (76.32%)
+  happiness   :  2,622 frames (10.12%)
+  surprise    :  1,315 frames ( 5.07%)
+  disgust     :  1,057 frames ( 4.08%)
+  sadness     :    404 frames ( 1.56%)
+  fear        :    366 frames ( 1.41%)
+  anger       :    365 frames ( 1.41%)
+
+
+ACTION UNIT STATISTICS
+--------------------------------------------------------------------------------
+Mean AU activation:
+  AU01: 0.6302
+  AU11: 0.6150
+  AU17: 0.5118
+  AU15: 0.4162
+  AU02: 0.4143
+  AU23: 0.3900
+  AU25: 0.3801
+  AU24: 0.3662
+  AU05: 0.3472
+  AU14: 0.2923
+  AU04: 0.2858
+  AU43: 0.2448
+  AU06: 0.2446
+  AU09: 0.2402
+  AU26: 0.2142
+  AU12: 0.1918
+  AU28: 0.1784
+  AU07: 0.1286
+  AU20: 0.1174
+  AU10: 0.0702
+
+
+PER-VIDEO STATISTICS
+--------------------------------------------------------------------------------
+
+AIMB3084:
+  Total frames: 3776
+  Dominant emotion: neutral
+  Mean emotions:
+    anger       : 0.0101
+    disgust     : 0.0344
+    fear        : 0.0091
+    happiness   : 0.1078
+    sadness     : 0.0169
+    surprise    : 0.0178
+    neutral     : 0.8039
+
+BGLE8278:
+  Total frames: 3642
+  Dominant emotion: neutral
+  Mean emotions:
+    anger       : 0.0006
+    disgust     : 0.0017
+    fear        : 0.0019
+    happiness   : 0.1769
+    sadness     : 0.0044
+    surprise    : 0.0117
+    neutral     : 0.8029
+
+GUTH0227:
+  Total frames: 3615
+  Dominant emotion: neutral
+  Mean emotions:
+    anger       : 0.0010
+    disgust     : 0.0003
+    fear        : 0.0002
+    happiness   : 0.0006
+    sadness     : 0.0016
+    surprise    : 0.0004
+    neutral     : 0.9959
+
+JMOR1353:
+  Total frames: 3648
+  Dominant emotion: neutral
+  Mean emotions:
+    anger       : 0.0630
+    disgust     : 0.0605
+    fear        : 0.0167
+    happiness   : 0.1098
+    sadness     : 0.0535
+    surprise    : 0.1438
+    neutral     : 0.5527
+
+PKGP7582:
+  Total frames: 3617
+  Dominant emotion: neutral
+  Mean emotions:
+    anger       : 0.0508
+    disgust     : 0.0071
+    fear        : 0.0306
+    happiness   : 0.1502
+    sadness     : 0.0026
+    surprise    : 0.0677
+    neutral     : 0.6910
+
+VNBX9754:
+  Total frames: 3768
+  Dominant emotion: neutral
+  Mean emotions:
+    anger       : 0.0239
+    disgust     : 0.0459
+    fear        : 0.0015
+    happiness   : 0.0311
+    sadness     : 0.0433
+    surprise    : 0.0073
+    neutral     : 0.8470
+
+WRSB5786:
+  Total frames: 3854
+  Dominant emotion: neutral
+  Mean emotions:
+    anger       : 0.0354
+    disgust     : 0.1429
+    fear        : 0.0650
+    happiness   : 0.1454
+    sadness     : 0.0703
+    surprise    : 0.1363
+    neutral     : 0.4048

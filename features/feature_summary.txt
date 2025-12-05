@@ -1,0 +1,105 @@
+AU Feature Extraction Summary
+======================================================================
+
+Total videos: 7
+Total clips: 42
+Total frames: 25920
+
+Video IDs:
+  - AIMB3084
+  - BGLE8278
+  - GUTH0227
+  - JMOR1353
+  - PKGP7582
+  - VNBX9754
+  - WRSB5786
+
+Columns in combined feature file:
+  - sample_id
+  - video_id
+  - clip_id
+  - frame
+  - approx_time
+  - AU01
+  - AU02
+  - AU04
+  - AU05
+  - AU06
+  - AU07
+  - AU09
+  - AU10
+  - AU11
+  - AU12
+  - AU14
+  - AU15
+  - AU17
+  - AU20
+  - AU23
+  - AU24
+  - AU25
+  - AU26
+  - AU28
+  - AU43
+  - anger
+  - disgust
+  - fear
+  - happiness
+  - sadness
+  - surprise
+  - neutral
+
+Frames per video:
+video_id
+AIMB3084    3776
+BGLE8278    3642
+GUTH0227    3615
+JMOR1353    3648
+PKGP7582    3617
+VNBX9754    3768
+WRSB5786    3854
+dtype: int64
+
+Frames per clip:
+video_id  clip_id  frames
+AIMB3084        1     630
+AIMB3084        2     629
+AIMB3084        3     629
+AIMB3084        4     630
+AIMB3084        5     629
+AIMB3084        6     629
+BGLE8278        1     607
+BGLE8278        2     607
+BGLE8278        3     607
+BGLE8278        4     607
+BGLE8278        5     607
+BGLE8278        6     607
+GUTH0227        1     603
+GUTH0227        2     602
+GUTH0227        3     603
+GUTH0227        4     602
+GUTH0227        5     603
+GUTH0227        6     602
+JMOR1353        1     608
+JMOR1353        2     608
+JMOR1353        3     608
+JMOR1353        4     608
+JMOR1353        5     608
+JMOR1353        6     608
+PKGP7582        1     603
+PKGP7582        2     603
+PKGP7582        3     603
+PKGP7582        4     603
+PKGP7582        5     603
+PKGP7582        6     602
+VNBX9754        1     628
+VNBX9754        2     628
+VNBX9754        3     628
+VNBX9754        4     628
+VNBX9754        5     628
+VNBX9754        6     628
+WRSB5786        1     643
+WRSB5786        2     642
+WRSB5786        3     642
+WRSB5786        4     643
+WRSB5786        5     642
+WRSB5786        6     642
